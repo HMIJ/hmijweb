@@ -45,19 +45,21 @@
       <button class="carousel-control prev">&#10094;</button>
       <button class="carousel-control next">&#10095;</button>
     </div>
-    
+
       <!-- Announcement Card Section -->
-<div class="announcement-card">
-  <div class="announcement-header">
-    <h2>Latest Announcements</h2>
-  </div>
-  <div class="announcement-content">
-    <p>Stay tuned for important updates and events happening at HMIJ Foundation!</p>
-  </div>
-  <button class="announcement-btn">Read More</button>
-</div>
-
-
+      <div class="announcement-card">
+        <img src="images/front.jpg" alt="Announcement Image" class="announcement-img">
+        <div class="announcement-content">
+            <h2 id="announcement-title">Latest Announcements</h2>
+            <h3 id="announcement-subtitle">Stay Informed with HMIJ Foundation</h3>
+            <p id="announcement-description">Stay tuned for important updates and events happening at HMIJ Foundation!</p>
+            <button class="announcement-btn">Read More</button>
+            <div class="announcement-controls">
+                <button onclick="prevAnnouncement()">&#10094;</button>
+                <button onclick="nextAnnouncement()">&#10095;</button>
+            </div>
+        </div>
+    </div>    
     <script>
     document.addEventListener("DOMContentLoaded", function () {
       const carouselInner = document.querySelector(".carousel-inner");
@@ -90,6 +92,48 @@
         updateCarousel();
       });
     });
+    const announcements = [
+    {
+        title: "Latest Announcements",
+        subtitle: "Stay Informed with HMIJ Foundation",
+        description: "Stay tuned for important updates and events happening at HMIJ Foundation!",
+        image: "images/front.jpg"
+    },
+    {
+        title: "Upcoming Events",
+        subtitle: "Join Our Special Gatherings",
+        description: "Exciting events are coming up! Be sure to participate and make an impact.",
+        image: "images/event.jpg"
+    },
+    {
+        title: "Community Projects",
+        subtitle: "Making a Difference Together",
+        description: "Discover our latest community outreach programs and how you can help.",
+        image: "images/project.jpg"
+    }
+];
+
+let currentIndex = 0;
+
+function updateAnnouncement() {
+    document.getElementById("announcement-title").innerText = announcements[currentIndex].title;
+    document.getElementById("announcement-subtitle").innerText = announcements[currentIndex].subtitle;
+    document.getElementById("announcement-description").innerText = announcements[currentIndex].description;
+    document.querySelector(".announcement-img").src = announcements[currentIndex].image;
+}
+
+function nextAnnouncement() {
+    currentIndex = (currentIndex + 1) % announcements.length;
+    updateAnnouncement();
+}
+
+function prevAnnouncement() {
+    currentIndex = (currentIndex - 1 + announcements.length) % announcements.length;
+    updateAnnouncement();
+}
+
+// Auto change announcements every 5 seconds
+setInterval(nextAnnouncement, 5000);
     </script>
   </body>
 </html>
